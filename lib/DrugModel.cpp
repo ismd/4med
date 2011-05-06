@@ -4,28 +4,7 @@
 
 DrugModel::DrugModel()
 {
-    db = QSqlDatabase::addDatabase("QMYSQL");
 
-    db.setHostName("localhost");
-    db.setDatabaseName("4med");
-    db.setUserName("root");
-    db.setPassword("123");
-
-    ok = db.open();
-
-    if (!ok)
-        setError(db.lastError().text());
-}
-
-void DrugModel::setError(QSqlError err)
-{
-    error = err;
-    qDebug() << err;
-}
-
-QSqlError DrugModel::getError()
-{
-    return error;
 }
 
 bool DrugModel::insert(item i)

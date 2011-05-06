@@ -3,8 +3,9 @@
 
 #include <QString>
 #include <QtSql>
+#include "lib/DefaultModel.h"
 
-class DrugModel
+class DrugModel : public DefaultModel
 {
 private:
     struct item
@@ -13,17 +14,8 @@ private:
         QString title;
     };
 
-    QSqlQuery query;
-    QSqlDatabase db;
-    bool ok;
-    QSqlError error;
-    QSqlQueryModel model;
-
 public:
     DrugModel();
-
-    void setError(QSqlError);
-    QSqlError getError();
     bool insert(item);
     bool del(int id);
     bool update(item);

@@ -1,7 +1,9 @@
 #include <QtSql>
+#include <QMessageBox>
 #include "MainWindow.h"
 #include "ui_mainwindow.h"
 #include "lib/DrugModel.h"
+#include "lib/DefaultModel.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -16,6 +18,17 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->aAddDrug, SIGNAL(activated()), SLOT(addDrug()));
     connect(ui->aAddRecipient, SIGNAL(activated()), SLOT(addRecipient()));
     connect(ui->aAddRegistration, SIGNAL(activated()), SLOT(addRegistration()));
+
+    // Check if we can coonect to the database
+    DefaultModel* dm = new DefaultModel;
+
+    if (!dm->connected()) {
+        QMessageBox msgBox;
+        msgBox.setText(dm->getError().text());
+        msgBox.exec();
+
+        ui->statusBar->showMessage(tr("Can't connect to MySQL"));
+    }
 }
 
 MainWindow::~MainWindow()

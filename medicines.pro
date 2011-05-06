@@ -8,7 +8,9 @@ TEMPLATE = app
 DESTDIR = bin/
 SOURCES += main.cpp \
     gui/mainwindow.cpp \
-    lib/DrugModel.cpp
+    lib/DrugModel.cpp \
+    lib/DefaultModel.cpp
 HEADERS += gui/mainwindow.h \
-    lib/DrugModel.h
+    lib/DrugModel.h \
+    lib/DefaultModel.h
 FORMS += ui/mainwindow.ui
