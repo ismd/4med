@@ -3,13 +3,12 @@
 # -------------------------------------------------
 QT += sql \
     testlib
-TARGET = medicines
+TARGET = 4med
 TEMPLATE = app
 DESTDIR = bin/
 SOURCES += main.cpp \
     gui/mainwindow.cpp \
     lib/DrugModel.cpp
 HEADERS += gui/mainwindow.h \
-    lib/DrugModel.h \
-    lib/DbModel.h
+    lib/DrugModel.h
 FORMS += ui/mainwindow.ui

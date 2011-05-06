@@ -1,3 +1,4 @@
+#include <QtSql>
 #include "MainWindow.h"
 #include "ui_mainwindow.h"
 #include "lib/DrugModel.h"
@@ -8,10 +9,13 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    connect(ui->aShowDepartments, SIGNAL(activated()), SLOT(showDepartments()));
+    connect(ui->aShowDrugs, SIGNAL(activated()), SLOT(showDrugs()));
+    connect(ui->aShowRecipients, SIGNAL(activated()), SLOT(showRecipients()));
     connect(ui->aAddDepartment, SIGNAL(activated()), SLOT(addDepartment()));
-    connect(ui->aAddDrug, SIGNAL(activated()), SLOT(addDrug));
-    connect(ui->aAddRecipient, SIGNAL(activated()), SLOT(addRecipient));
-    connect(ui->aAddRegistration, SIGNAL(activated()), SLOT(addRegistration));
+    connect(ui->aAddDrug, SIGNAL(activated()), SLOT(addDrug()));
+    connect(ui->aAddRecipient, SIGNAL(activated()), SLOT(addRecipient()));
+    connect(ui->aAddRegistration, SIGNAL(activated()), SLOT(addRegistration()));
 }
 
 MainWindow::~MainWindow()
@@ -31,6 +35,23 @@ void MainWindow::changeEvent(QEvent *e)
     }
 }
 
+void MainWindow::showDepartments()
+{
+
+}
+
+void MainWindow::showDrugs()
+{
+    DrugModel *dm = new DrugModel();
+    dm->selectAll();
+    ui->tableView->setModel(dm->getModel());
+}
+
+void MainWindow::showRecipients()
+{
+
+}
+
 void MainWindow::addDepartment()
 {
 
@@ -38,8 +59,7 @@ void MainWindow::addDepartment()
 
 void MainWindow::addDrug()
 {
-    DrugModel* dm = new DrugModel;
-    dm->addItem();
+
 }
 
 void MainWindow::addRecipient()

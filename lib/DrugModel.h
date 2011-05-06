@@ -1,14 +1,35 @@
 #ifndef DRUGMODEL_H
 #define DRUGMODEL_H
 
-#include "lib/DbModel.h"
+#include <QString>
+#include <QtSql>
 
-class DrugModel : public DbModel
+class DrugModel
 {
+private:
+    struct item
+    {
+        int id;
+        QString title;
+    };
+
+    QSqlQuery query;
+    QSqlDatabase db;
+    bool ok;
+    QSqlError error;
+    QSqlQueryModel model;
+
 public:
     DrugModel();
 
-    void addItem();
+    void setError(QSqlError);
+    QSqlError getError();
+    bool insert(item);
+    bool del(int id);
+    bool update(item);
+    bool select(int id);
+    QSqlQueryModel* selectAll();
+    QSqlQueryModel* getModel();
 };
 
 #endif // DRUGMODEL_H

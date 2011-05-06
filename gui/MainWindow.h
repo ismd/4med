@@ -13,7 +13,10 @@ public:
     MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-public slots:
+private slots:
+    void showDepartments();
+    void showDrugs();
+    void showRecipients();
     void addDepartment();
     void addDrug();
     void addRecipient();
