@@ -7,10 +7,10 @@ TARGET = 4med
 TEMPLATE = app
 DESTDIR = bin/
 SOURCES += main.cpp \
-    gui/mainwindow.cpp \
+    gui/MainWindow.cpp \
     lib/DrugModel.cpp \
     lib/DefaultModel.cpp
-HEADERS += gui/mainwindow.h \
+HEADERS += gui/MainWindow.h \
     lib/DrugModel.h \
     lib/DefaultModel.h
-FORMS += ui/mainwindow.ui
+FORMS += ui/MainWindow.ui

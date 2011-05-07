@@ -1,7 +1,7 @@
 #include <QtSql>
 #include <QMessageBox>
 #include "MainWindow.h"
-#include "ui_mainwindow.h"
+#include "ui_MainWindow.h"
 #include "lib/DrugModel.h"
 #include "lib/DefaultModel.h"
 
