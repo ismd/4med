@@ -6,7 +6,6 @@
 class DefaultModel
 {
 protected:
-    QSqlQuery query;
     QSqlDatabase db;
     bool ok;
     QSqlError error;

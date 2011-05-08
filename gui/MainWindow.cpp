@@ -4,6 +4,7 @@
 #include "ui_MainWindow.h"
 #include "lib/DrugModel.h"
 #include "lib/DefaultModel.h"
+#include "gui/AddDrug.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -19,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->aAddRecipient, SIGNAL(activated()), SLOT(addRecipient()));
     connect(ui->aAddRegistration, SIGNAL(activated()), SLOT(addRegistration()));
 
-    // Check if we can coonect to the database
+    // Check if we can connect to the database
     DefaultModel* dm = new DefaultModel;
 
     if (!dm->connected()) {
@@ -27,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
         msgBox.setText(dm->getError().text());
         msgBox.exec();
 
-        ui->statusBar->showMessage(tr("Can't connect to MySQL"));
+        setStatusMessage(tr("Can't connect to MySQL"));
     }
 }
 
@@ -48,6 +49,11 @@ void MainWindow::changeEvent(QEvent *e)
     }
 }
 
+void MainWindow::setStatusMessage(QString message)
+{
+    ui->statusBar->showMessage(message);
+}
+
 void MainWindow::showDepartments()
 {
 
@@ -57,7 +63,8 @@ void MainWindow::showDrugs()
 {
     DrugModel *dm = new DrugModel();
     dm->selectAll();
-    ui->tableView->setModel(dm->getModel());
+
+    //ui->tableView->setModel(dm->getModel());
 }
 
 void MainWindow::showRecipients()
@@ -72,7 +79,8 @@ void MainWindow::addDepartment()
 
 void MainWindow::addDrug()
 {
-
+    AddDrug* ad = new AddDrug(this);
+    ad->show();
 }
 
 void MainWindow::addRecipient()

@@ -9,8 +9,11 @@ DESTDIR = bin/
 SOURCES += main.cpp \
     gui/MainWindow.cpp \
     lib/DrugModel.cpp \
-    lib/DefaultModel.cpp
+    lib/DefaultModel.cpp \
+    gui/AddDrug.cpp
 HEADERS += gui/MainWindow.h \
     lib/DrugModel.h \
-    lib/DefaultModel.h
-FORMS += ui/MainWindow.ui
+    lib/DefaultModel.h \
+    gui/AddDrug.h
+FORMS += ui/MainWindow.ui \
+    ui/AddDrug.ui

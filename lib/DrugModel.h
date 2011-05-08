@@ -8,17 +8,13 @@
 class DrugModel : public DefaultModel
 {
 private:
-    struct item
-    {
-        int id;
-        QString title;
-    };
+    QSqlQuery query;
 
 public:
     DrugModel();
-    bool insert(item);
+    bool insert(QString title);
     bool del(int id);
-    bool update(item);
+    bool update(int id, QString title);
     bool select(int id);
     QSqlQueryModel* selectAll();
     QSqlQueryModel* getModel();

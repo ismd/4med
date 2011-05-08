@@ -7,16 +7,17 @@ DrugModel::DrugModel()
 
 }
 
-bool DrugModel::insert(item i)
+bool DrugModel::insert(QString title)
 {
     if (!ok) {
         setError(db.lastError().text());
         return false;
     }
 
-    query.prepare("INSERT INTO Drug (id, title) values (:id, :title)");
-    query.bindValue(":id", i.id);
-    query.bindValue(":title", i.title);
+    if (!query.prepare("INSERT INTO Drug (title) values (:title)"))
+        return false;
+
+    query.bindValue(":title", title);
 
     if (query.exec())
         return true;
@@ -44,7 +45,7 @@ bool DrugModel::del(int id)
     }
 }
 
-bool DrugModel::update(item i)
+bool DrugModel::update(int id, QString title)
 {
     if (!ok) {
         setError(db.lastError().text());
@@ -52,8 +53,8 @@ bool DrugModel::update(item i)
     }
 
     query.prepare("UPDATE Drug SET title=:title WHERE id=:id");
-    query.bindValue(":id", i.id);
-    query.bindValue(":title", i.title);
+    query.bindValue(":id", id);
+    query.bindValue(":title", title);
 
     if (query.exec())
         return true;
@@ -65,6 +66,7 @@ bool DrugModel::update(item i)
 
 bool DrugModel::select(int id)
 {
+    // TODO: доделать
     if (!ok) {
         setError(db.lastError());
         return false;
@@ -80,9 +82,6 @@ QSqlQueryModel* DrugModel::selectAll()
     if (!ok)
         setError(db.lastError());
     else {
-//        model.setTable("Drug");
-//        model.select();
-//        model.setEditStrategy(QSqlTableModel::OnFieldChange);
         model.setQuery("SELECT id, title FROM Drug");
 
         if (model.lastError().isValid())
