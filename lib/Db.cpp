@@ -12,7 +12,7 @@ namespace Db
         db.setUserName("root");
         db.setPassword("123");
 
-        ok = db.open();
+        Db::ok = db.open();
 
         if (!ok) {
             setError();
@@ -20,6 +20,11 @@ namespace Db
         }
 
         return true;
+    }
+
+    bool connected()
+    {
+        return ok;
     }
 
     QSqlError setError()
@@ -38,5 +43,11 @@ namespace Db
     QSqlError getError()
     {
         return error;
+    }
+
+    int getCount(QString tableName)
+    {
+        // TODO: make this function
+        return 0;
     }
 }

@@ -10,9 +10,11 @@ namespace Db
     static bool ok;
 
     bool connect();
+    bool connected();
     QSqlError setError();
     void setError(QSqlError);
     QSqlError getError();
+    int getCount(QString tableName);
 }
 
 #endif // DB_H

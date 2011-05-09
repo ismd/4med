@@ -5,7 +5,7 @@
 
 bool DrugModel::insert(QString title)
 {
-    if (!Db::ok)
+    if (!Db::connected())
         return false;
 
     if (!query.prepare("INSERT INTO Drug (title) values (:title)"))
@@ -23,7 +23,7 @@ bool DrugModel::insert(QString title)
 
 bool DrugModel::del(int id)
 {
-    if (!Db::ok)
+    if (!Db::connected())
         return false;
 
     query.prepare("DELETE FROM Drug WHERE id=:id");
@@ -39,7 +39,7 @@ bool DrugModel::del(int id)
 
 bool DrugModel::update(int id, QString title)
 {
-    if (!Db::ok)
+    if (!Db::connected())
         return false;
 
     query.prepare("UPDATE Drug SET title=:title WHERE id=:id");
@@ -69,7 +69,7 @@ bool DrugModel::update(int id, QString title)
 
 QSqlQueryModel* DrugModel::selectAll()
 {
-    if (!Db::ok)
+    if (!Db::connected())
         return false;
     else {
         model.setQuery("SELECT id, title FROM Drug");

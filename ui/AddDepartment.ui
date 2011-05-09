@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>4med::Добавление отдела</string>
   </property>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
@@ -85,5 +85,38 @@
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>AddDepartment</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>406</x>
+     <y>40</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>234</x>
+     <y>42</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>AddDepartment</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>406</x>
+     <y>40</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>234</x>
+     <y>42</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

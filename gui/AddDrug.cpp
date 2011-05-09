@@ -37,7 +37,7 @@ void AddDrug::addItem()
 
     DrugModel* model = new DrugModel;
 
-    if (Db::ok)
+    if (Db::connected())
         model->insert(ui->eTitle->text());
     else {
         QMessageBox msgBox;

@@ -37,7 +37,7 @@ void AddDepartment::addItem()
 
     DepartmentModel* model = new DepartmentModel;
 
-    if (Db::ok)
+    if (Db::connected())
         model->insert(ui->eTitle->text());
     else {
         QMessageBox msgBox;

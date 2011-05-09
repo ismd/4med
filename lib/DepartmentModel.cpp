@@ -5,7 +5,7 @@
 
 bool DepartmentModel::insert(QString title)
 {
-    if (!Db::ok)
+    if (!Db::connected())
         return false;
 
     if (!query.prepare("INSERT INTO Department (title) values (:title)"))
@@ -23,7 +23,7 @@ bool DepartmentModel::insert(QString title)
 
 bool DepartmentModel::del(int id)
 {
-    if (!Db::ok)
+    if (!Db::connected())
         return false;
 
     query.prepare("DELETE FROM Department WHERE id=:id");
@@ -39,7 +39,7 @@ bool DepartmentModel::del(int id)
 
 bool DepartmentModel::update(int id, QString title)
 {
-    if (!Db::ok)
+    if (!Db::connected())
         return false;
 
     query.prepare("UPDATE Department SET title=:title WHERE id=:id");
@@ -69,7 +69,7 @@ bool DepartmentModel::update(int id, QString title)
 
 QSqlQueryModel* DepartmentModel::selectAll()
 {
-    if (!Db::ok)
+    if (!Db::connected())
         return false;
     else {
         model.setQuery("SELECT id, title FROM Department");
