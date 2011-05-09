@@ -14,7 +14,7 @@ public:
     ~AddDrug();
 
 private slots:
-    void addDrug();
+    void addItem();
 
 protected:
     void changeEvent(QEvent *e);

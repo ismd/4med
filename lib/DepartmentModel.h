@@ -1,11 +1,11 @@
-#ifndef DRUGMODEL_H
-#define DRUGMODEL_H
+#ifndef DEPARTMENTMODEL_H
+#define DEPARTMENTMODEL_H
 
 #include <QString>
 #include <QtSql>
 #include "lib/DefaultModel.h"
 
-class DrugModel : virtual public DefaultModel
+class DepartmentModel : virtual public DefaultModel
 {
 private:
     QSqlQuery query;
@@ -18,4 +18,4 @@ public:
     QSqlQueryModel* getModel();
 };
 
-#endif // DRUGMODEL_H
+#endif // DEPARTMENTMODEL_H

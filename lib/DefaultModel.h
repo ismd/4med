@@ -3,19 +3,17 @@
 
 #include <QtSql>
 
+// FIXME: need to make this class abstract
 class DefaultModel
 {
 protected:
-    QSqlDatabase db;
-    bool ok;
-    QSqlError error;
     QSqlQueryModel model;
 
-public:
-    DefaultModel();
-    bool connected();
-    void setError(QSqlError);
-    QSqlError getError();
+//public:
+//    virtual bool insert();
+//    virtual bool del();
+//    virtual bool update();
+//    virtual QSqlQueryModel* selectAll();
 };
 
 #endif // DEFAULTMODEL_H

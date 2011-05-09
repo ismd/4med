@@ -1,24 +1,24 @@
 #include <QMessageBox>
-#include "gui/AddDrug.h"
-#include "ui_AddDrug.h"
-#include "lib/DrugModel.h"
+#include "gui/AddDepartment.h"
+#include "ui_AddDepartment.h"
+#include "lib/DepartmentModel.h"
 #include "lib/Db.h"
 
-AddDrug::AddDrug(QWidget *parent) :
+AddDepartment::AddDepartment(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::AddDrug)
+    ui(new Ui::AddDepartment)
 {
     ui->setupUi(this);
 
     connect(ui->buttonBox, SIGNAL(accepted()), SLOT(addItem()));
 }
 
-AddDrug::~AddDrug()
+AddDepartment::~AddDepartment()
 {
     delete ui;
 }
 
-void AddDrug::changeEvent(QEvent *e)
+void AddDepartment::changeEvent(QEvent *e)
 {
     QDialog::changeEvent(e);
     switch (e->type()) {
@@ -30,12 +30,12 @@ void AddDrug::changeEvent(QEvent *e)
     }
 }
 
-void AddDrug::addItem()
+void AddDepartment::addItem()
 {
     if (ui->eTitle->text() == "")
         return;
 
-    DrugModel* model = new DrugModel;
+    DepartmentModel* model = new DepartmentModel;
 
     if (Db::ok)
         model->insert(ui->eTitle->text());
@@ -45,8 +45,4 @@ void AddDrug::addItem()
         msgBox.setText(Db::setError().text());
         msgBox.exec();
     }
-
-    // TODO: don't know how to set status bar message of parent
-//    else
-//        parent()->setStatusMessage(tr("!!!"));
 }

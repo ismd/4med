@@ -1,14 +1,14 @@
 #include <QtSql>
 #include <QDebug>
-#include "DrugModel.h"
+#include "DepartmentModel.h"
 #include "lib/Db.h"
 
-bool DrugModel::insert(QString title)
+bool DepartmentModel::insert(QString title)
 {
     if (!Db::ok)
         return false;
 
-    if (!query.prepare("INSERT INTO Drug (title) values (:title)"))
+    if (!query.prepare("INSERT INTO Department (title) values (:title)"))
         return false;
 
     query.bindValue(":title", title);
@@ -21,12 +21,12 @@ bool DrugModel::insert(QString title)
     }
 }
 
-bool DrugModel::del(int id)
+bool DepartmentModel::del(int id)
 {
     if (!Db::ok)
         return false;
 
-    query.prepare("DELETE FROM Drug WHERE id=:id");
+    query.prepare("DELETE FROM Department WHERE id=:id");
     query.bindValue(":id", id);
 
     if (query.exec())
@@ -37,12 +37,12 @@ bool DrugModel::del(int id)
     }
 }
 
-bool DrugModel::update(int id, QString title)
+bool DepartmentModel::update(int id, QString title)
 {
     if (!Db::ok)
         return false;
 
-    query.prepare("UPDATE Drug SET title=:title WHERE id=:id");
+    query.prepare("UPDATE Department SET title=:title WHERE id=:id");
     query.bindValue(":id", id);
     query.bindValue(":title", title);
 
@@ -67,12 +67,12 @@ bool DrugModel::update(int id, QString title)
 //    query.exec();
 //}
 
-QSqlQueryModel* DrugModel::selectAll()
+QSqlQueryModel* DepartmentModel::selectAll()
 {
     if (!Db::ok)
         return false;
     else {
-        model.setQuery("SELECT id, title FROM Drug");
+        model.setQuery("SELECT id, title FROM Department");
 
         if (model.lastError().isValid())
             Db::setError(model.lastError());
@@ -81,7 +81,7 @@ QSqlQueryModel* DrugModel::selectAll()
     return &model;
 }
 
-QSqlQueryModel* DrugModel::getModel()
+QSqlQueryModel* DepartmentModel::getModel()
 {
     return &model;
 }

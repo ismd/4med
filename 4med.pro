@@ -8,12 +8,18 @@ TEMPLATE = app
 DESTDIR = bin/
 SOURCES += main.cpp \
     gui/MainWindow.cpp \
+    gui/AddDrug.cpp \
+    gui/AddDepartment.cpp \
     lib/DrugModel.cpp \
-    lib/DefaultModel.cpp \
-    gui/AddDrug.cpp
+    lib/DepartmentModel.cpp \
+    lib/Db.cpp
 HEADERS += gui/MainWindow.h \
+    gui/AddDrug.h \
+    gui/AddDepartment.h \
     lib/DrugModel.h \
+    lib/DepartmentModel.h \
     lib/DefaultModel.h \
-    gui/AddDrug.h
+    lib/Db.h
 FORMS += ui/MainWindow.ui \
-    ui/AddDrug.ui
+    ui/AddDrug.ui \
+    ui/AddDepartment.ui
