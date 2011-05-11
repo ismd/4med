@@ -47,7 +47,16 @@ namespace Db
 
     int getCount(QString tableName)
     {
-        // TODO: make this function
-        return 0;
+        if (!connected())
+            return -1;
+
+        QSqlQuery query;
+
+        query.prepare("SELECT count() FROM :tableName");
+        query.bindValue(":tableName", tableName);
+
+        query.exec();
+
+        return query.value(0).toInt();
     }
 }

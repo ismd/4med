@@ -28,6 +28,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
         setStatusMessage(tr("Can't connect to MySQL"));
     }
+
+    ui->lDepartments->setText(QString::number(Db::getCount("Department")));
+    ui->lDrugs->setText(QString::number(Db::getCount("Drug")));
+    ui->lRecipients->setText(QString::number(Db::getCount("Recipient")));
+    ui->lRegistrations->setText(QString::number(Db::getCount("Registration")));
 }
 
 MainWindow::~MainWindow()
