@@ -72,7 +72,7 @@ QSqlQueryModel* DepartmentModel::selectAll()
     if (!Db::connected())
         return false;
     else {
-        model.setQuery("SELECT id, title FROM Department");
+        model.setQuery("SELECT title, id FROM Department ORDER BY title");
 
         if (model.lastError().isValid())
             Db::setError(model.lastError());

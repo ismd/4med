@@ -22,6 +22,7 @@ private slots:
     void addDrug();
     void addRecipient();
     void addRegistration();
+    void updateCounts();
 
 protected:
     void changeEvent(QEvent *e);

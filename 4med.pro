@@ -12,14 +12,19 @@ SOURCES += main.cpp \
     gui/AddDepartment.cpp \
     lib/DrugModel.cpp \
     lib/DepartmentModel.cpp \
-    lib/Db.cpp
+    lib/Db.cpp \
+    lib/RecipientModel.cpp \
+    gui/AddRecipient.cpp
 HEADERS += gui/MainWindow.h \
     gui/AddDrug.h \
     gui/AddDepartment.h \
     lib/DrugModel.h \
     lib/DepartmentModel.h \
     lib/DefaultModel.h \
-    lib/Db.h
+    lib/Db.h \
+    lib/RecipientModel.h \
+    gui/AddRecipient.h
 FORMS += ui/MainWindow.ui \
     ui/AddDrug.ui \
-    ui/AddDepartment.ui
+    ui/AddDepartment.ui \
+    ui/AddRecipient.ui

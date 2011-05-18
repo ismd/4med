@@ -52,11 +52,11 @@ namespace Db
 
         QSqlQuery query;
 
-        query.prepare("SELECT count() FROM :tableName");
-        query.bindValue(":tableName", tableName);
+        // Don't know why query.bindValue don't work here
+        query.prepare("SELECT * FROM " + tableName);
 
         query.exec();
 
-        return query.value(0).toInt();
+        return query.size();
     }
 }

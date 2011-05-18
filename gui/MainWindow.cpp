@@ -5,6 +5,7 @@
 #include "lib/Db.h"
 #include "gui/AddDrug.h"
 #include "gui/AddDepartment.h"
+#include "gui/AddRecipient.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -29,10 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
         setStatusMessage(tr("Can't connect to MySQL"));
     }
 
-    ui->lDepartments->setText(QString::number(Db::getCount("Department")));
-    ui->lDrugs->setText(QString::number(Db::getCount("Drug")));
-    ui->lRecipients->setText(QString::number(Db::getCount("Recipient")));
-    ui->lRegistrations->setText(QString::number(Db::getCount("Registration")));
+    updateCounts();
 }
 
 MainWindow::~MainWindow()
@@ -50,6 +48,14 @@ void MainWindow::changeEvent(QEvent *e)
     default:
         break;
     }
+}
+
+void MainWindow::updateCounts()
+{
+    ui->lDepartments->setText(QString::number(Db::getCount(QString("Department"))));
+    ui->lDrugs->setText(QString::number(Db::getCount(QString("Drug"))));
+    ui->lRecipients->setText(QString::number(Db::getCount("Recipient")));
+    ui->lRegistrations->setText(QString::number(Db::getCount("Registration")));
 }
 
 void MainWindow::setStatusMessage(QString message)
@@ -79,6 +85,9 @@ void MainWindow::addDepartment()
 {
     AddDepartment* ad = new AddDepartment(this);
     ad->show();
+
+    // TODO: update counts after insert
+//    connect(ad, SIGNAL(destroyed()), SLOT(updateCounts()));
 }
 
 void MainWindow::addDrug()
@@ -89,7 +98,8 @@ void MainWindow::addDrug()
 
 void MainWindow::addRecipient()
 {
-
+    AddRecipient* ar = new AddRecipient();
+    ar->show();
 }
 
 void MainWindow::addRegistration()
