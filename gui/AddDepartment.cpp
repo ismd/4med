@@ -11,6 +11,7 @@ AddDepartment::AddDepartment(QWidget *parent) :
     ui->setupUi(this);
 
     connect(ui->buttonBox, SIGNAL(accepted()), SLOT(addItem()));
+    connect(ui->buttonBox, SIGNAL(rejected()), SLOT(reject()));
 }
 
 AddDepartment::~AddDepartment()
@@ -32,8 +33,12 @@ void AddDepartment::changeEvent(QEvent *e)
 
 void AddDepartment::addItem()
 {
-    if (ui->eTitle->text() == "")
+    if (ui->eTitle->text() == "") {
+        QMessageBox msgBox;
+        msgBox.setText(trUtf8("Не введено наименование"));
+        msgBox.exec();
         return;
+    }
 
     DepartmentModel* model = new DepartmentModel;
 
@@ -45,4 +50,6 @@ void AddDepartment::addItem()
         msgBox.setText(Db::setError().text());
         msgBox.exec();
     }
+
+    accept();
 }

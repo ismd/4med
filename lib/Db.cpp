@@ -52,7 +52,7 @@ namespace Db
 
         QSqlQuery query;
 
-        // Don't know why query.bindValue don't work here
+        // Don't know why query.bindValue doesn't work here
         query.prepare("SELECT * FROM " + tableName);
 
         query.exec();

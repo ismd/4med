@@ -12,6 +12,7 @@ AddRecipient::AddRecipient(QWidget *parent) :
     ui->setupUi(this);
 
     connect(ui->buttonBox, SIGNAL(accepted()), SLOT(addItem()));
+    connect(ui->buttonBox, SIGNAL(rejected()), SLOT(reject()));
 
     // Fill combobox with departments
     DepartmentModel* depmodel = new DepartmentModel;
@@ -26,8 +27,19 @@ AddRecipient::~AddRecipient()
 
 void AddRecipient::addItem()
 {
-    if (ui->eFIO->text() == "")
+    if (ui->eFIO->text() == "") {
+        QMessageBox msgBox;
+        msgBox.setText(trUtf8("Не введено ФИО"));
+        msgBox.exec();
         return;
+    }
+
+    if (ui->eIdDepartment->currentIndex() == -1) {
+        QMessageBox msgBox;
+        msgBox.setText(trUtf8("Не выбран отдел"));
+        msgBox.exec();
+        return;
+    }
 
     RecipientModel* model = new RecipientModel;
 
@@ -40,4 +52,6 @@ void AddRecipient::addItem()
         msgBox.setText(Db::setError().text());
         msgBox.exec();
     }
+
+    accept();
 }

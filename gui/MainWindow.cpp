@@ -6,6 +6,7 @@
 #include "gui/AddDrug.h"
 #include "gui/AddDepartment.h"
 #include "gui/AddRecipient.h"
+#include "gui/AddRegistration.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -27,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
         msgBox.setText(Db::getError().text());
         msgBox.exec();
 
-        setStatusMessage(tr("Can't connect to MySQL"));
+        setStatusMessage(trUtf8("Не могу подключиться к базе"));
     }
 
     updateCounts();
@@ -86,23 +87,29 @@ void MainWindow::addDepartment()
     AddDepartment* ad = new AddDepartment(this);
     ad->show();
 
-    // TODO: update counts after insert
-//    connect(ad, SIGNAL(destroyed()), SLOT(updateCounts()));
+    connect(ad, SIGNAL(accepted()), SLOT(updateCounts()));
 }
 
 void MainWindow::addDrug()
 {
     AddDrug* ad = new AddDrug(this);
     ad->show();
+
+    connect(ad, SIGNAL(accepted()), SLOT(updateCounts()));
 }
 
 void MainWindow::addRecipient()
 {
-    AddRecipient* ar = new AddRecipient();
+    AddRecipient* ar = new AddRecipient(this);
     ar->show();
+
+    connect(ar, SIGNAL(accepted()), SLOT(updateCounts()));
 }
 
 void MainWindow::addRegistration()
 {
+    AddRegistration* ar = new AddRegistration(this);
+    ar->show();
 
+    connect(ar, SIGNAL(accepted()), SLOT(updateCounts()));
 }

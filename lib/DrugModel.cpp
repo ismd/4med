@@ -72,7 +72,7 @@ QSqlQueryModel* DrugModel::selectAll()
     if (!Db::connected())
         return false;
     else {
-        model.setQuery("SELECT id, title FROM Drug");
+        model.setQuery("SELECT title, id FROM Drug ORDER BY title");
 
         if (model.lastError().isValid())
             Db::setError(model.lastError());

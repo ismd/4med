@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>4med::Добавление лекарственного средства</string>
   </property>
+  <property name="locale">
+   <locale language="Russian" country="RussianFederation"/>
+  </property>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
@@ -85,38 +88,5 @@
   </widget>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>AddDrug</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>406</x>
-     <y>40</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>238</x>
-     <y>45</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>AddDrug</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>406</x>
-     <y>40</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>238</x>
-     <y>45</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

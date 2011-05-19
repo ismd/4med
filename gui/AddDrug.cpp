@@ -11,6 +11,7 @@ AddDrug::AddDrug(QWidget *parent) :
     ui->setupUi(this);
 
     connect(ui->buttonBox, SIGNAL(accepted()), SLOT(addItem()));
+    connect(ui->buttonBox, SIGNAL(rejected()), SLOT(reject()));
 }
 
 AddDrug::~AddDrug()
@@ -32,8 +33,12 @@ void AddDrug::changeEvent(QEvent *e)
 
 void AddDrug::addItem()
 {
-    if (ui->eTitle->text() == "")
+    if (ui->eTitle->text() == "") {
+        QMessageBox msgBox;
+        msgBox.setText(trUtf8("Не введено наименование"));
+        msgBox.exec();
         return;
+    }
 
     DrugModel* model = new DrugModel;
 
@@ -49,4 +54,6 @@ void AddDrug::addItem()
     // TODO: don't know how to set status bar message of parent
 //    else
 //        parent()->setStatusMessage(tr("!!!"));
+
+    accept();
 }

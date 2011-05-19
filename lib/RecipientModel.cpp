@@ -54,3 +54,22 @@ bool RecipientModel::update(int id, QString fio, int idDepartment)
         return false;
     }
 }
+
+QSqlQueryModel* RecipientModel::select(int idDepartment)
+{
+    if (!Db::connected())
+        return false;
+    else {
+        QString queryStr = "SELECT fio, id FROM Recipient WHERE idDepartment=" + \
+                QString::number(idDepartment) + " ORDER BY fio";
+
+        QSqlQuery query(queryStr);
+
+        model.setQuery(query);
+
+        if (model.lastError().isValid())
+            Db::setError(model.lastError());
+    }
+
+    return &model;
+}
