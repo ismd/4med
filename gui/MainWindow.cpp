@@ -7,6 +7,7 @@
 #include "gui/AddDepartment.h"
 #include "gui/AddRecipient.h"
 #include "gui/AddRegistration.h"
+#include "gui/ShowRecipients.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,7 +15,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect(ui->aShowDepartments, SIGNAL(activated()), SLOT(showDepartments()));
     connect(ui->aShowDrugs, SIGNAL(activated()), SLOT(showDrugs()));
     connect(ui->aShowRecipients, SIGNAL(activated()), SLOT(showRecipients()));
     connect(ui->aAddDepartment, SIGNAL(activated()), SLOT(addDepartment()));
@@ -64,11 +64,6 @@ void MainWindow::setStatusMessage(QString message)
     ui->statusBar->showMessage(message);
 }
 
-void MainWindow::showDepartments()
-{
-
-}
-
 void MainWindow::showDrugs()
 {
     //DrugModel *dm = new DrugModel();
@@ -79,7 +74,8 @@ void MainWindow::showDrugs()
 
 void MainWindow::showRecipients()
 {
-
+    ShowRecipients* sr = new ShowRecipients;
+    sr->show();
 }
 
 void MainWindow::addDepartment()

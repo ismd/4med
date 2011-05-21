@@ -54,18 +54,20 @@ bool DepartmentModel::update(int id, QString title)
     }
 }
 
-//bool DrugModel::select(int id)
-//{
-//    // TODO: доделать
-//    if (!ok) {
-//        setError(db.lastError());
-//        return false;
-//    }
-//
-//    query.prepare("SELECT id, title FROM Drug WHERE id=:id LIMIT 1");
-//    query.bindValue(":id", id);
-//    query.exec();
-//}
+QMap<int, QString> DepartmentModel::select()
+{
+    QMap<int, QString> map;
+
+    if (!Db::connected())
+        return map;
+
+    QSqlQuery q("SELECT id, title FROM Department ORDER BY title");
+
+    while (q.next())
+        map[q.value(0).toInt()] = q.value(1).toString();
+
+    return map;
+}
 
 QSqlQueryModel* DepartmentModel::selectAll()
 {

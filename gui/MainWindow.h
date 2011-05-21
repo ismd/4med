@@ -15,7 +15,6 @@ public:
     void setStatusMessage(QString);
 
 private slots:
-    void showDepartments();
     void showDrugs();
     void showRecipients();
     void addDepartment();

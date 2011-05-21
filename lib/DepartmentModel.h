@@ -14,6 +14,7 @@ public:
     bool insert(QString title);
     bool del(int id);
     bool update(int id, QString title);
+    QMap<int, QString> select();
     QSqlQueryModel* selectAll();
     QSqlQueryModel* getModel();
 };

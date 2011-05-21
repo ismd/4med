@@ -15,6 +15,7 @@ public:
     bool del(int id);
     bool update(int id, QString fio, int idDepartment);
     QSqlQueryModel* select(int idDepartment);
+    QList<QString> selectList(int idDepartment);
 };
 
 #endif // RECIPIENTMODEL_H

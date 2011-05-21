@@ -73,3 +73,18 @@ QSqlQueryModel* RecipientModel::select(int idDepartment)
 
     return &model;
 }
+
+QList<QString> RecipientModel::selectList(int idDepartment)
+{
+    QList<QString> ls;
+
+    if (!Db::connected())
+        return ls;
+
+    QSqlQuery q("SELECT fio FROM Recipient WHERE idDepartment=" + QString::number(idDepartment));
+
+    while (q.next())
+        ls.append(q.value(0).toString());
+
+    return ls;
+}
