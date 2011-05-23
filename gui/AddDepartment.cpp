@@ -31,6 +31,17 @@ void AddDepartment::changeEvent(QEvent *e)
     }
 }
 
+void AddDepartment::setEditable(int id)
+{
+    idFromDb = id;
+    DepartmentModel *model = new DepartmentModel;
+
+    ui->eTitle->setText(model->selectById(id));
+
+    disconnect(ui->buttonBox, SIGNAL(accepted()), 0, 0);
+    connect(ui->buttonBox, SIGNAL(accepted()), SLOT(editItem()));
+}
+
 void AddDepartment::addItem()
 {
     if (ui->eTitle->text() == "") {
@@ -40,7 +51,7 @@ void AddDepartment::addItem()
         return;
     }
 
-    DepartmentModel* model = new DepartmentModel;
+    DepartmentModel *model = new DepartmentModel;
 
     if (Db::connected())
         model->insert(ui->eTitle->text());
@@ -50,6 +61,21 @@ void AddDepartment::addItem()
         msgBox.setText(Db::setError().text());
         msgBox.exec();
     }
+
+    accept();
+}
+
+void AddDepartment::editItem()
+{
+    if (ui->eTitle->text() == "") {
+        QMessageBox msgBox;
+        msgBox.setText(trUtf8("Не введено наименование"));
+        msgBox.exec();
+        return;
+    }
+
+    DepartmentModel *model = new DepartmentModel;
+    model->update(idFromDb, ui->eTitle->text());
 
     accept();
 }

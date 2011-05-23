@@ -15,14 +15,29 @@ AddRecipient::AddRecipient(QWidget *parent) :
     connect(ui->buttonBox, SIGNAL(rejected()), SLOT(reject()));
 
     // Fill combobox with departments
-    DepartmentModel* depmodel = new DepartmentModel;
-    depall = depmodel->selectAll();
+    DepartmentModel *depModel = new DepartmentModel;
+    depall = depModel->selectAll();
     ui->eIdDepartment->setModel(depall);
 }
 
 AddRecipient::~AddRecipient()
 {
     delete ui;
+}
+
+void AddRecipient::setEditable(int id, int idDepartment)
+{
+    idFromDb = id;
+    RecipientModel *model = new RecipientModel;
+
+    ui->eFIO->setText(model->selectById(id));
+
+    for (int i = 0; i < ui->eIdDepartment->count(); i++)
+        if (idDepartment == ui->eIdDepartment->model()->index(i, 1).data())
+            ui->eIdDepartment->setCurrentIndex(i);
+
+    disconnect(ui->buttonBox, SIGNAL(accepted()), 0, 0);
+    connect(ui->buttonBox, SIGNAL(accepted()), SLOT(editItem()));
 }
 
 void AddRecipient::addItem()
@@ -52,6 +67,22 @@ void AddRecipient::addItem()
         msgBox.setText(Db::setError().text());
         msgBox.exec();
     }
+
+    accept();
+}
+
+void AddRecipient::editItem()
+{
+    if (ui->eFIO->text() == "") {
+        QMessageBox msgBox;
+        msgBox.setText(trUtf8("Не введено ФИО"));
+        msgBox.exec();
+        return;
+    }
+
+    RecipientModel *model = new RecipientModel;
+    int idDepartment = depall->record(ui->eIdDepartment->currentIndex()).value("id").toInt();
+    model->update(idFromDb, ui->eFIO->text(), idDepartment);
 
     accept();
 }

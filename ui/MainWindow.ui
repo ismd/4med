@@ -65,7 +65,7 @@
         <item>
          <widget class="QLabel" name="label_4">
           <property name="text">
-           <string>Расход/приход:</string>
+           <string>Приход/расход:</string>
           </property>
          </widget>
         </item>

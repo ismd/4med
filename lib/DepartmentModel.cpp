@@ -29,10 +29,19 @@ bool DepartmentModel::del(int id)
     query.prepare("DELETE FROM Department WHERE id=:id");
     query.bindValue(":id", id);
 
+    if (!query.exec()) {
+        Db::setError(query.lastError());
+        return false;
+    }
+
+    query.clear();
+    query.prepare("DELETE FROM Recipient WHERE idDepartment=:id");
+    query.bindValue(":id", id);
+
     if (query.exec())
         return true;
     else {
-        Db::setError();
+        Db::setError(query.lastError());
         return false;
     }
 }
@@ -54,6 +63,17 @@ bool DepartmentModel::update(int id, QString title)
     }
 }
 
+QString DepartmentModel::selectById(int id)
+{
+    if (!Db::connected())
+        return "";
+
+    QSqlQuery q("SELECT title FROM Department WHERE id=" + QString::number(id) + " LIMIT 1");
+    q.next();
+
+    return q.value(0).toString();
+}
+
 QMap<int, QString> DepartmentModel::select()
 {
     QMap<int, QString> map;
@@ -61,7 +81,7 @@ QMap<int, QString> DepartmentModel::select()
     if (!Db::connected())
         return map;
 
-    QSqlQuery q("SELECT id, title FROM Department ORDER BY title");
+    QSqlQuery q("SELECT id, title FROM Department ORDER BY id");
 
     while (q.next())
         map[q.value(0).toInt()] = q.value(1).toString();

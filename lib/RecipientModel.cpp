@@ -42,10 +42,10 @@ bool RecipientModel::update(int id, QString fio, int idDepartment)
     if (!Db::connected())
         return false;
 
-    query.prepare("UPDATE Department SET fio=:fio, idDepartment=:idDepartment WHERE id=:id");
+    query.prepare("UPDATE Recipient SET fio=:fio, idDepartment=:idDepartment WHERE id=:id");
     query.bindValue(":id", id);
-    query.bindValue(":fio", fio);
     query.bindValue(":idDepartment", idDepartment);
+    query.bindValue(":fio", fio);
 
     if (query.exec())
         return true;
@@ -53,6 +53,17 @@ bool RecipientModel::update(int id, QString fio, int idDepartment)
         Db::setError();
         return false;
     }
+}
+
+QString RecipientModel::selectById(int id)
+{
+    if (!Db::connected())
+        return "";
+
+    QSqlQuery q("SELECT fio FROM Recipient WHERE id=" + QString::number(id) + " LIMIT 1");
+    q.next();
+
+    return q.value(0).toString();
 }
 
 QSqlQueryModel* RecipientModel::select(int idDepartment)
@@ -72,6 +83,21 @@ QSqlQueryModel* RecipientModel::select(int idDepartment)
     }
 
     return &model;
+}
+
+QMap<int, QString> RecipientModel::selectMap(int idDepartment)
+{
+    QMap<int, QString> map;
+
+    if (!Db::connected())
+        return map;
+
+    QSqlQuery q("SELECT id, fio FROM Recipient WHERE idDepartment=" + QString::number(idDepartment));
+
+    while (q.next())
+        map[q.value(0).toInt()] = q.value(1).toString();
+
+    return map;
 }
 
 QList<QString> RecipientModel::selectList(int idDepartment)

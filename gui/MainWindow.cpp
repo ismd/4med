@@ -8,6 +8,7 @@
 #include "gui/AddRecipient.h"
 #include "gui/AddRegistration.h"
 #include "gui/ShowRecipients.h"
+#include "gui/ShowDrugs.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -66,21 +67,25 @@ void MainWindow::setStatusMessage(QString message)
 
 void MainWindow::showDrugs()
 {
-    //DrugModel *dm = new DrugModel();
-    //dm->selectAll();
+    ShowDrugs *sd = new ShowDrugs;
+    sd->show();
 
-    //ui->tableView->setModel(dm->getModel());
+    // FIXME: doesn't work
+    connect(sd, SIGNAL(destroyed()), SLOT(updateCounts()));
 }
 
 void MainWindow::showRecipients()
 {
-    ShowRecipients* sr = new ShowRecipients;
+    ShowRecipients *sr = new ShowRecipients;
     sr->show();
+
+    // FIXME: doesn't work
+    connect(sr, SIGNAL(destroyed()), SLOT(updateCounts()));
 }
 
 void MainWindow::addDepartment()
 {
-    AddDepartment* ad = new AddDepartment(this);
+    AddDepartment *ad = new AddDepartment(this);
     ad->show();
 
     connect(ad, SIGNAL(accepted()), SLOT(updateCounts()));
@@ -88,7 +93,7 @@ void MainWindow::addDepartment()
 
 void MainWindow::addDrug()
 {
-    AddDrug* ad = new AddDrug(this);
+    AddDrug *ad = new AddDrug(this);
     ad->show();
 
     connect(ad, SIGNAL(accepted()), SLOT(updateCounts()));
@@ -96,7 +101,7 @@ void MainWindow::addDrug()
 
 void MainWindow::addRecipient()
 {
-    AddRecipient* ar = new AddRecipient(this);
+    AddRecipient *ar = new AddRecipient(this);
     ar->show();
 
     connect(ar, SIGNAL(accepted()), SLOT(updateCounts()));
@@ -104,7 +109,7 @@ void MainWindow::addRecipient()
 
 void MainWindow::addRegistration()
 {
-    AddRegistration* ar = new AddRegistration(this);
+    AddRegistration *ar = new AddRegistration(this);
     ar->show();
 
     connect(ar, SIGNAL(accepted()), SLOT(updateCounts()));

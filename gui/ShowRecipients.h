@@ -2,6 +2,8 @@
 #define SHOWRECIPIENTS_H
 
 #include <QWidget>
+#include <QString>
+#include <QMap>
 
 namespace Ui {
     class ShowRecipients;
@@ -15,9 +17,13 @@ public:
     explicit ShowRecipients(QWidget *parent = 0);
     ~ShowRecipients();
 
+private slots:
+    void editItem();
+    void delItem();
+    void fillTree();
+
 private:
     Ui::ShowRecipients *ui;
-    void fillTree();
 };
 
 #endif // SHOWRECIPIENTS_H

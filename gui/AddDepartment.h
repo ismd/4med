@@ -12,15 +12,18 @@ class AddDepartment : public QDialog {
 public:
     AddDepartment(QWidget *parent = 0);
     ~AddDepartment();
+    void setEditable(int id);
 
 private slots:
     void addItem();
+    void editItem();
 
 protected:
     void changeEvent(QEvent *e);
 
 private:
     Ui::AddDepartment *ui;
+    int idFromDb;
 };
 
 #endif // ADDDEPARTMENT_H
