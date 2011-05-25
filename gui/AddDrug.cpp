@@ -31,6 +31,17 @@ void AddDrug::changeEvent(QEvent *e)
     }
 }
 
+void AddDrug::setEditable(int id)
+{
+    idFromDb = id;
+    DrugModel *model = new DrugModel;
+
+    ui->eTitle->setText(model->selectById(id));
+
+    disconnect(ui->buttonBox, SIGNAL(accepted()), 0, 0);
+    connect(ui->buttonBox, SIGNAL(accepted()), SLOT(editItem()));
+}
+
 void AddDrug::addItem()
 {
     if (ui->eTitle->text() == "") {
@@ -54,6 +65,21 @@ void AddDrug::addItem()
     // TODO: don't know how to set status bar message of parent
 //    else
 //        parent()->setStatusMessage(tr("!!!"));
+
+    accept();
+}
+
+void AddDrug::editItem()
+{
+    if (ui->eTitle->text() == "") {
+        QMessageBox msgBox;
+        msgBox.setText(trUtf8("Не введено наименование"));
+        msgBox.exec();
+        return;
+    }
+
+    DrugModel *model = new DrugModel;
+    model->update(idFromDb, ui->eTitle->text());
 
     accept();
 }

@@ -65,14 +65,14 @@ void ShowRecipients::editItem()
     bool departmentChecked = ui->treeWidget->currentIndex().parent() == ui->treeWidget->model()->index(-1, 0);
 
     if (departmentChecked) {
-        AddDepartment *editWindow = new AddDepartment;
+        AddDepartment *editWindow = new AddDepartment(this);
         int idDepartment = ui->treeWidget->currentItem()->data(1, 0).toInt();
         editWindow->setEditable(idDepartment);
 
         editWindow->show();
         connect(editWindow, SIGNAL(accepted()), SLOT(fillTree()));
     } else {
-        AddRecipient *editWindow = new AddRecipient;
+        AddRecipient *editWindow = new AddRecipient(this);
         int idRecipient = ui->treeWidget->currentItem()->data(1, 0).toInt();
         int idDepartment = ui->treeWidget->currentItem()->parent()->data(1, 0).toInt();
 

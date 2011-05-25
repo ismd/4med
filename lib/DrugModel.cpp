@@ -49,34 +49,31 @@ bool DrugModel::update(int id, QString title)
     if (query.exec())
         return true;
     else {
-        Db::setError();
+        Db::setError(query.lastError());
         return false;
     }
 }
 
-//bool DrugModel::select(int id)
-//{
-//    // TODO: доделать
-//    if (!ok) {
-//        setError(db.lastError());
-//        return false;
-//    }
-//
-//    query.prepare("SELECT id, title FROM Drug WHERE id=:id LIMIT 1");
-//    query.bindValue(":id", id);
-//    query.exec();
-//}
+QString DrugModel::selectById(int id)
+{
+    if (!Db::connected())
+        return "";
+
+    QSqlQuery q("SELECT title FROM Drug WHERE id=" + QString::number(id) + " LIMIT 1");
+    q.next();
+
+    return q.value(0).toString();
+}
 
 QSqlQueryModel* DrugModel::selectAll()
 {
     if (!Db::connected())
         return false;
-    else {
-        model.setQuery("SELECT title, id FROM Drug ORDER BY title");
 
-        if (model.lastError().isValid())
-            Db::setError(model.lastError());
-    }
+    model.setQuery("SELECT title, id FROM Drug ORDER BY title");
+
+    if (model.lastError().isValid())
+        Db::setError(model.lastError());
 
     return &model;
 }

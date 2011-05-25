@@ -15,6 +15,10 @@ public:
     explicit ShowDrugs(QWidget *parent = 0);
     ~ShowDrugs();
 
+private slots:
+    void fillList();
+    void editDrug();
+
 private:
     Ui::ShowDrugs *ui;
 };
