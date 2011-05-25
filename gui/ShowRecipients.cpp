@@ -95,7 +95,8 @@ void ShowRecipients::delItem()
     }
 
     int ret = QMessageBox::question(this, trUtf8("Удаление"), \
-                                    trUtf8("Вы уверены, что хотите удалить запись?"), \
+                                    trUtf8("Вы уверены, что хотите удалить запись?\n") +
+                                    trUtf8("При выборе отдела также будут удалены все сотрудники отдела"), \
                                     QMessageBox::StandardButtons(QMessageBox::Cancel | QMessageBox::Yes));
 
     if (ret != QMessageBox::Yes)

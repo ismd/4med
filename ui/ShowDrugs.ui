@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>4med::Просмотр лекарственных средств</string>
   </property>
+  <property name="locale">
+   <locale language="Russian" country="RussianFederation"/>
+  </property>
   <widget class="QListView" name="drugsList">
    <property name="geometry">
     <rect>
@@ -23,31 +26,38 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="bRegistration">
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>350</x>
-     <y>20</y>
-     <width>111</width>
-     <height>26</height>
+     <x>341</x>
+     <y>21</y>
+     <width>123</width>
+     <height>88</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Приход/расход</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="bEdit">
-   <property name="geometry">
-    <rect>
-     <x>350</x>
-     <y>50</y>
-     <width>111</width>
-     <height>26</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Изменить</string>
-   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QPushButton" name="bRegistration">
+      <property name="text">
+       <string>Приход/расход</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="bEdit">
+      <property name="text">
+       <string>Изменить</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="bDel">
+      <property name="text">
+       <string>Удалить</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

@@ -29,10 +29,19 @@ bool DrugModel::del(int id)
     query.prepare("DELETE FROM Drug WHERE id=:id");
     query.bindValue(":id", id);
 
+    if (!query.exec()) {
+        Db::setError(query.lastError());
+        return false;
+    }
+
+    query.clear();
+    query.prepare("DELETE FROM Registration WHERE idDrug=:id");
+    query.bindValue(":id", id);
+
     if (query.exec())
         return true;
     else {
-        Db::setError();
+        Db::setError(query.lastError());
         return false;
     }
 }

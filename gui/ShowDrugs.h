@@ -16,8 +16,10 @@ public:
     ~ShowDrugs();
 
 private slots:
+    void showRegistrations();
     void fillList();
     void editDrug();
+    void delDrug();
 
 private:
     Ui::ShowDrugs *ui;
