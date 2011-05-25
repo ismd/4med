@@ -1,0 +1,13 @@
+Этот проект создаётся для учёта лекарственных средств, выдаваемых в медицинских учреждениях сотрудникам.
+Программа создаётся с использованием библиотеки Qt, что позволяет скомпилировать программу для различных операционных систем: GNU/Linux, Windows, Mac
+В директории bin/ лежит скомпилированный исполняемый файл для GNU/Linux.
+Чтобы скомпилировать программу, вам необходимо выполнить:
+qmake
+make
+
+This project is creating for registrating drugs issued in the health facility to recipients.
+Program is based on Qt library. It allows to compile it for different operating systems: GNU/Linux, Windows, Mac
+You can find compiled executable file for GNU/Linux into bin/ directory.
+To compile program you can execute:
+qmake
+make
