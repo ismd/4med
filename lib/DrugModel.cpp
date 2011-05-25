@@ -91,3 +91,42 @@ QSqlQueryModel* DrugModel::getModel()
 {
     return &model;
 }
+
+/**
+ * Returns list
+ * 0 - received count
+ * 1 - gave count
+ * 2 - balance
+ */
+QList<int> DrugModel::getCounts(int id)
+{
+    QList<int> ls;
+
+    if (!Db::connected())
+        return ls;
+
+    QSqlQuery q("SELECT MAX(id) FROM Registration");
+    q.next();
+    int maxId = q.value(0).toInt();
+
+    QString queryStr;
+    queryStr = "SELECT count(*) FROM Registration WHERE idDrug=";
+    queryStr += QString::number(id);
+    queryStr += " AND received=1 UNION SELECT count(*) FROM Registration WHERE idDrug=";
+    queryStr += QString::number(id);
+    queryStr += " AND received=0";
+
+    QSqlQuery q1(queryStr);
+
+    while (q1.next())
+        ls.append(q1.value(0).toInt());
+
+    queryStr = "SELECT balance FROM Registration WHERE id=";
+    queryStr += QString::number(maxId);
+
+    QSqlQuery q2(queryStr);
+    q2.next();
+    ls.append(q2.value(0).toInt());
+
+    return ls;
+}

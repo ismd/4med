@@ -15,6 +15,7 @@ ShowDrugs::ShowDrugs(QWidget *parent) :
     connect(ui->bRegistration, SIGNAL(clicked()), SLOT(showRegistrations()));
     connect(ui->bEdit, SIGNAL(clicked()), SLOT(editDrug()));
     connect(ui->bDel, SIGNAL(clicked()), SLOT(delDrug()));
+    connect(ui->drugsList, SIGNAL(clicked(QModelIndex)), SLOT(fillCounts()));
 }
 
 ShowDrugs::~ShowDrugs()
@@ -28,6 +29,25 @@ void ShowDrugs::fillList()
     QSqlQueryModel *queryModel = model->selectAll();
 
     ui->drugsList->setModel(queryModel);
+}
+
+void ShowDrugs::fillCounts()
+{
+    if (ui->drugsList->currentIndex().row() == -1) {
+        QMessageBox msgBox;
+        msgBox.setText(trUtf8("Не выбрано лекарственное средство"));
+        msgBox.exec();
+        return;
+    }
+
+    int idDrug = ui->drugsList->model()->index(ui->drugsList->currentIndex().row(), 1).data().toInt();
+
+    DrugModel model;
+    QList<int> counts = model.getCounts(idDrug);
+
+    ui->lReceived->setText(QString::number(counts.value(0)));
+    ui->lGave->setText(QString::number(counts.value(1)));
+    ui->lBalance->setText(QString::number(counts.value(2)));
 }
 
 void ShowDrugs::showRegistrations()

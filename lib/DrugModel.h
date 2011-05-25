@@ -17,6 +17,7 @@ public:
     QString selectById(int id);
     QSqlQueryModel* selectAll();
     QSqlQueryModel* getModel();
+    QList<int> getCounts(int id);
 };
 
 #endif // DRUGMODEL_H

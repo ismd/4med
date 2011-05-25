@@ -1,0 +1,4 @@
+*.o
+moc_*
+ui_*
+4med.pro.user

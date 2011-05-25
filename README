@@ -4,6 +4,7 @@
 Чтобы скомпилировать программу, вам необходимо выполнить:
 qmake
 make
+Также не забудьте создать базу данных MySQL и выполнить скрипт 4med.sql
 
 This project is creating for registrating drugs issued in the health facility to recipients.
 Program is based on Qt library. It allows to compile it for different operating systems: GNU/Linux, Windows, Mac
@@ -11,3 +12,4 @@ You can find compiled executable file for GNU/Linux into bin/ directory.
 To compile program you can execute:
 qmake
 make
+Also don't forget to create a MySQL database and execute 4med.sql script

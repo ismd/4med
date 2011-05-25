@@ -18,6 +18,7 @@ public:
 private slots:
     void showRegistrations();
     void fillList();
+    void fillCounts();
     void editDrug();
     void delDrug();
 
