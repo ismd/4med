@@ -63,14 +63,14 @@ void AddRegistration::addItem()
         return;
     }
 
-    RegistrationModel* model = new RegistrationModel;
+    RegistrationModel *model = new RegistrationModel;
 
     if (Db::connected()) {
         int idDrug = drugModel->record(ui->eIdDrug->currentIndex()).value("id").toInt();
         int idRecipient;
-        if (ui->eSended->isChecked())
+        if (ui->eSended->isChecked()) {
             idRecipient = recipientModel->record(ui->eIdRecipient->currentIndex()).value("id").toInt();
-        else
+        } else
             idRecipient = -1;
 
         model->insert(idDrug, ui->eWhen->dateTime(), ui->eAmount->value(), ui->eReceived->isChecked(), idRecipient);

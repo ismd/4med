@@ -3,6 +3,7 @@
 #include "ui_ShowDrugs.h"
 #include "lib/DrugModel.h"
 #include "gui/AddDrug.h"
+#include "gui/ShowRegistrations.h"
 
 ShowDrugs::ShowDrugs(QWidget *parent) :
     QWidget(parent),
@@ -61,7 +62,8 @@ void ShowDrugs::showRegistrations()
 
     int idDrug = ui->drugsList->model()->index(ui->drugsList->currentIndex().row(), 1).data().toInt();
 
-    // TODO: show form
+    ShowRegistrations *regShow = new ShowRegistrations(NULL, idDrug);
+    regShow->show();
 }
 
 void ShowDrugs::editDrug()

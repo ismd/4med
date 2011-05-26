@@ -112,21 +112,26 @@ QList<int> DrugModel::getCounts(int id)
     QString queryStr;
     queryStr = "SELECT count(*) FROM Registration WHERE idDrug=";
     queryStr += QString::number(id);
-    queryStr += " AND received=1 UNION SELECT count(*) FROM Registration WHERE idDrug=";
-    queryStr += QString::number(id);
-    queryStr += " AND received=0";
+    queryStr += " AND received=1";
 
     QSqlQuery q1(queryStr);
+    q1.next();
+    ls.append(q1.value(0).toInt());
 
-    while (q1.next())
-        ls.append(q1.value(0).toInt());
-
-    queryStr = "SELECT balance FROM Registration WHERE id=";
-    queryStr += QString::number(maxId);
+    queryStr = "SELECT count(*) FROM Registration WHERE idDrug=";
+    queryStr += QString::number(id);
+    queryStr += " AND received=0";
 
     QSqlQuery q2(queryStr);
     q2.next();
     ls.append(q2.value(0).toInt());
+
+    queryStr = "SELECT balance FROM Registration WHERE id=";
+    queryStr += QString::number(maxId);
+
+    QSqlQuery q3(queryStr);
+    q3.next();
+    ls.append(q3.value(0).toInt());
 
     return ls;
 }

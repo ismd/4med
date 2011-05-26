@@ -18,7 +18,8 @@ SOURCES += main.cpp \
     gui/AddRegistration.cpp \
     lib/RegistrationModel.cpp \
     gui/ShowRecipients.cpp \
-    gui/ShowDrugs.cpp
+    gui/ShowDrugs.cpp \
+    gui/ShowRegistrations.cpp
 HEADERS += gui/MainWindow.h \
     gui/AddDrug.h \
     gui/AddDepartment.h \
@@ -31,11 +32,13 @@ HEADERS += gui/MainWindow.h \
     gui/AddRegistration.h \
     lib/RegistrationModel.h \
     gui/ShowRecipients.h \
-    gui/ShowDrugs.h
+    gui/ShowDrugs.h \
+    gui/ShowRegistrations.h
 FORMS += ui/MainWindow.ui \
     ui/AddDrug.ui \
     ui/AddDepartment.ui \
     ui/AddRecipient.ui \
     ui/AddRegistration.ui \
     ui/ShowRecipients.ui \
-    ui/ShowDrugs.ui
+    ui/ShowDrugs.ui \
+    ui/ShowRegistrations.ui
