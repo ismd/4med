@@ -12,6 +12,7 @@ private:
 
 public:
     struct registration {
+        int id;
         int idRecipient;
         QString fioRecipient;
         QDateTime happened;
@@ -21,6 +22,7 @@ public:
     };
 
     bool insert(int idDrug, QDateTime happened, int amount, bool received, int idRecipient);
+    bool del(int id);
     QList<registration> getRegistrations(int id);
 };
 

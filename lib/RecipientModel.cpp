@@ -32,7 +32,7 @@ bool RecipientModel::del(int id)
     if (query.exec())
         return true;
     else {
-        Db::setError();
+        Db::setError(query.lastError());
         return false;
     }
 }

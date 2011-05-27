@@ -75,3 +75,21 @@ QList<RegistrationModel::registration> RegistrationModel::getRegistrations(int i
 
     return ls;
 }
+
+bool RegistrationModel::del(int id)
+{
+    // Don't use this method. I don't like to realise it
+    return false;
+//    if (!Db::connected())
+//        return false;
+
+//    query.prepare("DELETE FROM Registration WHERE id=:id");
+//    query.bindValue(":id", id);
+
+//    if (query.exec())
+//        return true;
+//    else {
+//        Db::setError(query.lastError());
+//        return false;
+//    }
+}
