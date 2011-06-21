@@ -2,7 +2,7 @@
 #include "lib/Db.h"
 #include <QDebug>
 
-bool RegistrationModel::insert(int idDrug, QDateTime happened, int amount, bool received, int idRecipient)
+bool RegistrationModel::insert(int idDrug, QDateTime happened, int amount, bool received, int idDepartment, int idRecipient)
 {
     if (!Db::connected())
         return false;
@@ -28,13 +28,14 @@ bool RegistrationModel::insert(int idDrug, QDateTime happened, int amount, bool 
     else
         curBalance -= amount;
 
-    query.prepare("INSERT INTO Registration (idDrug, happened, amount, received, idRecipient, balance) \
-                  VALUES (:idDrug, :happened, :amount, :received, :idRecipient, :balance)");
+    query.prepare("INSERT INTO Registration (idDrug, happened, amount, received, idDepartment, idRecipient, balance) \
+                  VALUES (:idDrug, :happened, :amount, :received, :idDepartment, :idRecipient, :balance)");
 
     query.bindValue(":idDrug", idDrug);
     query.bindValue(":happened", happened.toString("yyyy-MM-dd hh:mm:ss"));
     query.bindValue(":amount", amount);
     query.bindValue(":received", received);
+    query.bindValue(":idDepartment", (idDepartment == -1 ? "-1" : QString::number(idDepartment)));
     query.bindValue(":idRecipient", (idRecipient == -1 ? "-1" : QString::number(idRecipient)));
     query.bindValue(":balance", QString::number(curBalance));
 
@@ -54,8 +55,9 @@ QList<RegistrationModel::registration> RegistrationModel::getRegistrations(int i
         return ls;
     }
 
-    QString queryStr = "SELECT a.idRecipient, a.happened, a.amount, a.received, a.balance, b.fio ";
-    queryStr += "FROM Registration a LEFT OUTER JOIN Recipient b ON a.idRecipient=b.id WHERE a.idDrug=";
+    QString queryStr = "SELECT a.idRecipient, a.happened, a.amount, a.received, a.balance, b.fio, c.title ";
+    queryStr += "FROM Registration a LEFT OUTER JOIN Recipient b ON a.idRecipient=b.id ";
+    queryStr += "LEFT OUTER JOIN Department c ON a.idDepartment=c.id WHERE a.idDrug=";
     queryStr += QString::number(id);
     queryStr += " ORDER BY a.id DESC";
 
@@ -69,6 +71,7 @@ QList<RegistrationModel::registration> RegistrationModel::getRegistrations(int i
         reg.received = q.value(3).toBool();
         reg.balance = q.value(4).toInt();
         reg.fioRecipient = q.value(5).toString();
+        reg.titleDepartment = q.value(6).toString();
 
         ls.append(reg);
     }

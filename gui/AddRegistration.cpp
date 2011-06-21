@@ -67,13 +67,20 @@ void AddRegistration::addItem()
 
     if (Db::connected()) {
         int idDrug = drugModel->record(ui->eIdDrug->currentIndex()).value("id").toInt();
+        int idDepartment;
         int idRecipient;
-        if (ui->eSended->isChecked()) {
+
+        if (ui->eSended->isChecked())
+            idDepartment = recipientModel->record(ui->eIdDepartment->currentIndex()).value("id").toInt();
+        else
+            idDepartment = -1;
+
+        if (ui->eSended->isChecked())
             idRecipient = recipientModel->record(ui->eIdRecipient->currentIndex()).value("id").toInt();
-        } else
+        else
             idRecipient = -1;
 
-        model->insert(idDrug, ui->eWhen->dateTime(), ui->eAmount->value(), ui->eReceived->isChecked(), idRecipient);
+        model->insert(idDrug, ui->eWhen->dateTime(), ui->eAmount->value(), ui->eReceived->isChecked(), idDepartment, idRecipient);
     } else {
         QMessageBox msgBox;
         // FIXME: doesn't work
@@ -94,9 +101,11 @@ void AddRegistration::setReceived()
 
 void AddRegistration::fillRecipients()
 {
-    int idDepartment = departmentModel->record(ui->eIdDepartment->currentIndex()).value("id").toInt();
+//    int idDepartment = departmentModel->record(ui->eIdDepartment->currentIndex()).value("id").toInt();
+//    RecipientModel* rm = new RecipientModel;
+//    recipientModel = rm->select(idDepartment);
     RecipientModel* rm = new RecipientModel;
-    recipientModel = rm->select(idDepartment);
+    recipientModel = rm->selectAll();
 
     ui->eIdRecipient->setModel(recipientModel);
 }

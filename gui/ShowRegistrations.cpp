@@ -22,7 +22,8 @@ ShowRegistrations::ShowRegistrations(QWidget *parent, int idDrug) :
     ui->tableWidget->setColumnWidth(1, 120);
     ui->tableWidget->setColumnWidth(2, 90);
     ui->tableWidget->setColumnWidth(3, 200);
-    ui->tableWidget->setColumnWidth(4, 70);
+    ui->tableWidget->setColumnWidth(4, 200);
+    ui->tableWidget->setColumnWidth(5, 70);
 
     int row = 0;
     foreach (RegistrationModel::registration reg, ls) {
@@ -41,10 +42,13 @@ ShowRegistrations::ShowRegistrations(QWidget *parent, int idDrug) :
         ui->tableWidget->setItem(row, 3, item3);
 
         QTableWidgetItem *item4 = new QTableWidgetItem(QString::number(reg.balance));
-        ui->tableWidget->setItem(row, 4, item4);
+        ui->tableWidget->setItem(row, 5, item4);
 
-        QTableWidgetItem *item5 = new QTableWidgetItem(QString::number(reg.id));
-        ui->tableWidget->setItem(row, 5, item5);
+        QTableWidgetItem *item5 = new QTableWidgetItem(reg.titleDepartment);
+        ui->tableWidget->setItem(row, 4, item5);
+
+        QTableWidgetItem *item6 = new QTableWidgetItem(QString::number(reg.id));
+        ui->tableWidget->setItem(row, 6, item6);
 
         row++;
     }

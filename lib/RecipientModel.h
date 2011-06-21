@@ -18,6 +18,7 @@ public:
     QString selectById(int);
     QMap<int, QString> selectMap(int idDepartment);
     QList<QString> selectList(int idDepartment);
+    QSqlQueryModel* selectAll();
 };
 
 #endif // RECIPIENTMODEL_H

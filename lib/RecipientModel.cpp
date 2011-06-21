@@ -114,3 +114,21 @@ QList<QString> RecipientModel::selectList(int idDepartment)
 
     return ls;
 }
+
+QSqlQueryModel* RecipientModel::selectAll()
+{
+    if (!Db::connected())
+        return false;
+    else {
+        QString queryStr = "SELECT fio, id FROM Recipient ORDER BY fio";
+
+        QSqlQuery query(queryStr);
+
+        model.setQuery(query);
+
+        if (model.lastError().isValid())
+            Db::setError(model.lastError());
+    }
+
+    return &model;
+}
